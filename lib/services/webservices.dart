@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:login_navigation/models/user.dart';
-
 import 'package:http/http.dart' as http; 
 
 class Webservice {

@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         home: MyHomePage(title: 'None'),
+        routes: {
+          '/signup': (_) => SignUp(),
+        },
       ),
     );
     
@@ -51,16 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if(prov.user != null){
       print(prov.user);
-      return MaterialApp(
-        home: Home(),
-      );
+      return Home();
     }else{
-      return MaterialApp(
-        home: SignIn(),
-        routes: {
-          '/signup': (_) => SignUp(),
-        },        
-      );
+      return SignIn();
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_navigation/controllers/auth_controller.dart';
-import 'package:login_navigation/pages/sign_up.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatelessWidget{
@@ -8,6 +7,32 @@ class SignIn extends StatelessWidget{
   final _formKey = GlobalKey<FormState>();
   final emailTextField = TextEditingController();
   final passwordTextField = TextEditingController();
+
+  Widget addTextField(String label, String missingMessage, var controller){
+   return Padding(
+     padding: const EdgeInsets.all(5.0),
+     child: SizedBox(
+        child:TextFormField(
+          decoration: InputDecoration(  
+            labelText: label,  
+          ),
+          validator: (value) {
+            if (value.isEmpty) {
+              return missingMessage;
+            }
+            return null;
+          },
+          controller: controller,
+        ),
+        height: 50,
+        width: 220,
+      ),
+   );    
+  }
+
+
+
+
 
 
 
@@ -25,40 +50,12 @@ class SignIn extends StatelessWidget{
             Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Email',  
-                      ),  
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter email';
-                        }
-                        return null;
-                      },
-                      controller: emailTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Password',  
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                      controller: passwordTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
+                  addTextField("Email", "Please enter email", emailTextField),
+                  addTextField("Password", "Please enter password", passwordTextField),
                   RaisedButton(
+                    color: Colors.tealAccent,
                     onPressed:(){
                       if(_formKey.currentState.validate()){
                         //prov.signin("elmail@gmail.com", "123456");
@@ -70,6 +67,7 @@ class SignIn extends StatelessWidget{
                     child: Text("Sign in"),
                   ),
                   RaisedButton(
+                    color: Colors.blueGrey,
                     onPressed:(){
                       Navigator.of(context).pushNamed('/signup');
                     },

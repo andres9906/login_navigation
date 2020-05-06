@@ -24,6 +24,7 @@ class Auth extends ChangeNotifier{
       savePreferencesUser();
       notifyListeners();
     }
+    
   }
 
   void logOut() async{

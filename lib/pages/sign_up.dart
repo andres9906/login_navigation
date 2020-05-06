@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_navigation/controllers/auth_controller.dart';
-import 'package:login_navigation/pages/sing_in.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatelessWidget{
@@ -10,6 +9,31 @@ class SignUp extends StatelessWidget{
   final passwordTextField = TextEditingController();
   final usernameTextField = TextEditingController();
   final nameTextField = TextEditingController();
+
+
+  Widget addTextField(String label, String missingMessage, var controller){
+   return Padding(
+     padding: const EdgeInsets.all(3.0),
+     child: SizedBox(
+        child:TextFormField(
+          decoration: InputDecoration(  
+            labelText: label,  
+          ),
+          validator: (value) {
+            if (value.isEmpty) {
+              return missingMessage;
+            }
+            return null;
+          },
+          controller: controller,
+        ),
+        height: 50,
+        width: 220,
+      ),
+   );    
+  }
+
+
 
   @override
 Widget build(BuildContext context) {
@@ -25,72 +49,14 @@ Widget build(BuildContext context) {
             Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Email',  
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter email';
-                        }
-                        return null;
-                      },
-                      controller: emailTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Password',  
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                      controller: passwordTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Username',  
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter username';
-                        }
-                        return null;
-                      },
-                      controller: usernameTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
-                  SizedBox(
-                    child:TextFormField(
-                      decoration: const InputDecoration(  
-                        labelText: 'Name',  
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter name';
-                        }
-                        return null;
-                      },
-                      controller: nameTextField,
-                    ),
-                    height: 45,
-                    width: 220,
-                  ),
+                  addTextField("Email", "Please enter email", emailTextField),
+                  addTextField("Password", "Please enter password", passwordTextField),
+                  addTextField("Username", "Please enter username", usernameTextField),
+                  addTextField("Name", "Please enter name", nameTextField),
                   RaisedButton(
+                    color: Colors.tealAccent,
                     onPressed:(){
                       if(_formKey.currentState.validate()){
                         prov.signup(emailTextField.text, passwordTextField.text, usernameTextField.text, nameTextField.text);

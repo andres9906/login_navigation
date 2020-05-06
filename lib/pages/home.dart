@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_navigation/controllers/auth_controller.dart';
-import 'package:login_navigation/models/user.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
